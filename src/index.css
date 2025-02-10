@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: rgb(255, 255, 255);
+  --color-secondary: rgb(32, 201, 151);
+  --color-background: rgb(15, 15, 15);
+  --color-border: rgb(65, 65, 65);
+  --color-border-shadow: rgb(65, 65, 65);
+  --color-card: rgb(25, 25, 25);
+  --color-cta: rgb(0, 122, 255);
+  --color-cta-active: rgb(0, 102, 215);
+  --color-cta-text: rgb(240, 240, 240);
+  --color-grape: rgb(155, 89, 182);
+}
+
+.light {
+  --color-primary: rgb(255, 87, 51);
+  --color-secondary: rgb(32, 201, 151);
+  --color-background: rgb(238, 0, 0);
+  --color-border: rgb(50, 50, 50);
+  --color-card: rgb(25, 25, 25);
+  --color-cta: rgb(0, 122, 255);
+  --color-cta-active: rgb(0, 102, 215);
+  --color-cta-text: rgb(240, 240, 240);
+  --color-grape: rgb(155, 89, 182);
+}
