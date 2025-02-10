@@ -1,11 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: rgb(255, 255, 255);
-  --color-secondary: rgb(32, 201, 151);
+  --font-primary: "Rubik", serif;
+  --font-secondary: "Poppins", serif;
+  --color-primary: rgb(25, 179, 231);
+  --color-secondary: rgb(17, 40, 74);
+  --color-third: rgb(255, 255, 255);
   --color-background: rgb(15, 15, 15);
   --color-border: rgb(65, 65, 65);
-  --color-border-shadow: rgb(65, 65, 65);
+  --color-box-shadow-color: rgb(0, 0, 0);
+  --color-btn-shadow-color: rgb(0 141 189);
+  --shadow-box-style: 0px 0px 0px 0px rgb(0 0 0 / 0.1),
+    1px 1px 5px 2px rgb(0 0 0 / 0.1);
+  --shadow-btn-style: 2px 2px 0px 2px rgb(0 0 0 / 0.1);
   --color-card: rgb(25, 25, 25);
   --color-cta: rgb(0, 122, 255);
   --color-cta-active: rgb(0, 102, 215);
