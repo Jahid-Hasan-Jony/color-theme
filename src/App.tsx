@@ -1,10 +1,15 @@
+import { useState } from "react";
+import { ThemeContext } from "./ContextAPI/ThemeContext";
 import ReactRoutes from "./ReactRoutes/ReactRoutes";
 
 function App() {
+  const [theme, setTheme] = useState("");
   return (
-    <div className="">
-      <ReactRoutes />
-    </div>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <div className={theme}>
+        <ReactRoutes />
+      </div>
+    </ThemeContext.Provider>
   );
 }
 
