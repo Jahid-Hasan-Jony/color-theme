@@ -9,7 +9,7 @@
   --color-secondary-100: rgba(25, 179, 231, 0.4);
   --color-accent: rgb(255, 255, 255);
   --color-background: rgb(15, 15, 15);
-  --color-border-color: rgb(65, 65, 65);
+  --color-border-color: rgb(133, 119, 0);
   --color-box-shadow-color: rgb(0, 0, 0);
   --color-btn-shadow-color: rgb(0 141 189);
   --color-btn-shadow-hover-color: rgba(14 50 103 1);
@@ -19,7 +19,7 @@
   --color-cta: rgb(0, 122, 255);
   --color-cta-active: rgb(0, 102, 215);
   --color-cta-text: rgb(255, 255, 255);
-  --color-cta-active: rgb(0, 226, 30);
+  --color-cta-active: rgb(255, 230, 9);
 }
 
 .light-mode {
