@@ -7,7 +7,7 @@ function Login() {
     event?.preventDefault();
     const mail = event?.target.mail.value;
     const password = event?.target.password.value;
-    console.log(mail, password);
+    const info = { mail, password };
   };
   return (
     <section className="min-h-[93vh] bg-background">

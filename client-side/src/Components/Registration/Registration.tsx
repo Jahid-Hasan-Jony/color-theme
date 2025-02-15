@@ -11,7 +11,16 @@ const Registration = () => {
     const designation = event?.target.designation.value;
     const blood = event?.target.blood.value;
     const password = event?.target.password.value;
-    console.log(name, mail, number, designation, blood, password);
+    const info = { name, mail, number, designation, blood, password };
+    fetch("http://localhost:3000/adduser", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(info),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
   };
   return (
     <>
