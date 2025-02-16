@@ -1,8 +1,17 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../ContextAPI/ThemeContext";
+import User from "../User/User";
 
 const Registration = () => {
   const { theme } = useContext(ThemeContext);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/allusers")
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, [data]);
+
   const submitHandler = () => {
     event?.preventDefault();
     const name = event?.target.name.value;
@@ -11,7 +20,16 @@ const Registration = () => {
     const designation = event?.target.designation.value;
     const blood = event?.target.blood.value;
     const password = event?.target.password.value;
-    console.log(name, mail, number, designation, blood, password);
+    const info = { name, mail, number, designation, blood, password };
+    fetch("http://localhost:3000/adduser", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(info),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
   };
   return (
     <>
@@ -79,6 +97,23 @@ const Registration = () => {
               </button>
             </form>
           </div>
+        </div>
+        <div className="flex justify-center items-center">
+          <table className="table-auto">
+            <thead className="text-white">
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Mail</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((item) => (
+                <User key={item._id} info={item} />
+              ))}
+            </tbody>
+          </table>
         </div>
       </section>
     </>
