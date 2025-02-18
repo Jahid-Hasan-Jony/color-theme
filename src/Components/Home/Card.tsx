@@ -6,7 +6,7 @@ const Card: React.FC = () => {
       <div className="shadow-box-style bg-card rounded shadow-box-shadow-color p-5 w-96 flex flex-col gap-5">
         <div className="h-52 rounded bg-center bg-no-repeat bg-cover bg-primary-100 bg-[url(/public/img.jpg)] bg-blend-overlay"></div>
         <h1 className="text-primary font-semibold font-primary text-3xl">
-          Project Information
+          Project Informations
         </h1>
         <p className="text-accent font-secondary">
           Lorem Ipsum is simply dummy text of the printing and typesetting
