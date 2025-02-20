@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const User = ({ info }) => {
-  const { name, mail, _id } = info;
+  const { name, mail, _id, publicId } = info;
   const [status, setStatus] = useState(false);
   const [mode, setMode] = useState(false);
   const [defaultValue, setDefaultValue] = useState(info);
@@ -38,20 +38,19 @@ const User = ({ info }) => {
     }
   };
 
-  const deleteHandler = async (_id) => {
+  const deleteHandler = async (_id, publicId) => {
     try {
       const response = await fetch("http://localhost:3000/deleteuser", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ _id }),
+        body: JSON.stringify({ _id, publicId }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        console.log("User deleted successfully!");
         setStatus(!status);
       } else {
         console.error(data.error || "Failed to delete user.");
@@ -101,7 +100,7 @@ const User = ({ info }) => {
           <>
             <span
               className="bg-red-600 cursor-pointer p-2 inline-block m-1 rounded"
-              onClick={() => deleteHandler(_id)}
+              onClick={() => deleteHandler(_id, publicId)}
             >
               Delete
             </span>

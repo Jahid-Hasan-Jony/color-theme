@@ -4,49 +4,77 @@ import User from "../User/User";
 
 const Registration = () => {
   const { theme } = useContext(ThemeContext);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([]); // Store users
+  const [file, setFile] = useState(null); // Store file
 
+  // Fetch Users (Runs only once)
   useEffect(() => {
     fetch("http://localhost:3000/allusers")
       .then((res) => res.json())
-      .then((data) => setData(data));
-  }, [data]);
+      .then((users) => setData(users))
+      .catch((error) => console.error("Fetch Error:", error));
+  }, [data]); // ✅ Empty dependency array to prevent infinite loop
 
-  const submitHandler = () => {
-    event?.preventDefault();
-    const name = event?.target.name.value;
-    const mail = event?.target.mail.value;
-    const number = event?.target.number.value;
-    const designation = event?.target.designation.value;
-    const blood = event?.target.blood.value;
-    const password = event?.target.password.value;
-    const info = { name, mail, number, designation, blood, password };
-    fetch("http://localhost:3000/adduser", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(info),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      });
+  // Handle Image Selection
+  const imageHandler = (e) => {
+    setFile(e.target.files[0]);
   };
+
+  // Handle Form Submit
+  const submitHandler = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("name", event.target.name.value);
+    formData.append("mail", event.target.mail.value);
+    formData.append("number", event.target.number.value);
+    formData.append("designation", event.target.designation.value);
+    formData.append("blood", event.target.blood.value);
+    formData.append("password", event.target.password.value);
+
+    try {
+      const response = await fetch("http://localhost:3000/adduser", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add user");
+      }
+
+      const newUser = await response.json();
+      setData((prevData) => [...prevData, newUser]); // ✅ Manually append new user
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <>
       <section className="min-h-[93vh] bg-background">
         <div className="p-5 flex justify-center items-center flex-wrap flex-col">
-          {theme != "light-mode" ? (
+          {theme !== "light-mode" ? (
             <img
               className="w-52 my-5"
               src="MTS-Logo-in-white-color-with-text.png"
-              alt=""
+              alt="Logo"
             />
           ) : (
-            <img className="w-52 my-5" src="MTS-Logo-Branding.png" alt="" />
+            <img className="w-52 my-5" src="MTS-Logo-Branding.png" alt="Logo" />
           )}
 
+          {/* Registration Form */}
           <div className="my-5 shadow-box-style bg-card rounded shadow-box-shadow-color p-5 w-96 flex flex-col gap-5">
             <form onSubmit={submitHandler}>
+              <input
+                className="mb-4 uppercase font-secondary block w-full rounded-md bg-accent/10 px-3 py-2 text-base text-primary bold placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary"
+                type="file"
+                name="file"
+                required
+                accept="image/jpg, image/png, image/jpeg"
+                onChange={imageHandler}
+              />
               <input
                 className="mb-4 uppercase font-secondary block w-full rounded-md bg-accent/10 px-3 py-2 text-base text-primary bold placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary"
                 type="text"
@@ -98,6 +126,8 @@ const Registration = () => {
             </form>
           </div>
         </div>
+
+        {/* User Table */}
         <div className="flex justify-center items-center">
           <table className="table-auto">
             <thead className="text-white">

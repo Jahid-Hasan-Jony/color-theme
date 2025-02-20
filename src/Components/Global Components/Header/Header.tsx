@@ -31,6 +31,14 @@ const Header = () => {
           <li>
             <Link
               className="text-accent hover:text-primary font-secondary text-md font-semibold"
+              to="/gallery"
+            >
+              Gallery
+            </Link>
+          </li>
+          <li>
+            <Link
+              className="text-accent hover:text-primary font-secondary text-md font-semibold"
               to="/login"
             >
               Login
